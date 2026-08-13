@@ -1,0 +1,9 @@
+🔑 YOUR DATABASE CREDENTIALS
+Credential	Value
+Hostname	dpg-d9uprkmgekts73d1gc50-a
+Port	5432
+Database	tbafinance_db
+Username	tbafinance_db_user
+Password	H57Q73eYZcwPFdQ8AioUI1nc1EIARPdp
+Internal URL	postgresql://tbafinance_db_user:H57Q73eYZcwPFdQ8AioUI1nc1EIARPdp@dpg-d9uprkmgekts73d1gc50-a/tbafinance_db
+External URL	postgresql://tbafinance_db_user:H57Q73eYZcwPFdQ8AioUI1nc1EIARPdp@dpg-d9uprkmgekts73d1gc50-a.singapore-postgres.render.com/tbafinance_db
