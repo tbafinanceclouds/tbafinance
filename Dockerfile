@@ -36,7 +36,8 @@ RUN composer install --no-dev --optimize-autoloader
 # Install and build frontend assets
 RUN npm install && npm run build
 
-# Set permissions
+# ✅ CREATE THE DIRECTORIES FIRST, THEN SET PERMISSIONS
+RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
