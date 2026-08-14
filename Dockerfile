@@ -36,19 +36,24 @@ RUN composer install --no-dev --optimize-autoloader
 # Install and build frontend assets
 RUN npm install && npm run build
 
-# ✅ CREATE THE DIRECTORIES FIRST, THEN SET PERMISSIONS
-RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache
+# Create storage directories
+RUN mkdir -p /var/www/html/storage /var/www/html/storage/app /var/www/html/storage/framework /var/www/html/storage/logs /var/www/html/bootstrap/cache
+
+# Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Configure Apache to serve from public directory
 RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
 
-# ✅ CHANGE PORT TO 10000
+# Change port to 10000
 RUN sed -i 's/Listen 80/Listen 10000/g' /etc/apache2/ports.conf
 RUN sed -i 's/:80/:10000/g' /etc/apache2/sites-available/000-default.conf
 
+# Make startup script executable
+RUN chmod +x /var/www/html/startup.sh
+
 EXPOSE 10000
 
-# ✅ Start Apache on port 10000
-CMD ["apache2-foreground"]
+# ✅ THIS IS WHAT RUNS THE STARTUP SCRIPT
+ENTRYPOINT ["/var/www/html/startup.sh"]
