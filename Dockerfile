@@ -10,13 +10,14 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     nodejs \
-    npm
+    npm \
+    libpq-dev
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+# Install PHP extensions (✅ ADDED pdo_pgsql and pgsql)
+RUN docker-php-ext-install pdo_mysql pdo_pgsql pgsql mbstring exif pcntl bcmath gd
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
@@ -55,5 +56,4 @@ RUN chmod +x /var/www/html/startup.sh
 
 EXPOSE 10000
 
-# ✅ THIS IS WHAT RUNS THE STARTUP SCRIPT
 ENTRYPOINT ["/var/www/html/startup.sh"]

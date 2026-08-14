@@ -19,11 +19,10 @@ php artisan migrate --force
 echo "🔗 Creating storage link..."
 php artisan storage:link
 
-# Optimize
+# Optimize (but skip view:cache to avoid errors)
 echo "⚡ Optimizing..."
 php artisan config:cache
 php artisan route:cache
-php artisan view:cache
 
 echo "========================================="
 echo "✅ Starting Apache..."
